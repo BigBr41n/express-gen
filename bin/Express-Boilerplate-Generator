@@ -1,4 +1,7 @@
-#!/usr/bin/env ts-node
+#!/usr/bin/env node
+
+require("ts-node").register();
+require("../commands/create");
 
 import { createExpressProject } from "../commands/create";
 

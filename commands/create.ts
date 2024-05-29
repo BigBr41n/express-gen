@@ -2,7 +2,7 @@ import fs from "fs";
 import { execSync } from "child_process";
 import chalk from "chalk";
 
-function createExpressProject(projectName: string) {
+export function createExpressProject(projectName: string) {
   try {
     fs.mkdirSync(projectName);
     process.chdir(projectName);
@@ -92,12 +92,4 @@ function createExpressProject(projectName: string) {
   } catch (err) {
     console.error(chalk.red("Error creating Express.js project:", err));
   }
-}
-
-// Parse command-line arguments
-const [, , projectName] = process.argv;
-if (!projectName) {
-  console.error(chalk.red("Please provide a project name."));
-} else {
-  createExpressProject(projectName);
 }
