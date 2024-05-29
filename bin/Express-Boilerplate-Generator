@@ -1,0 +1,10 @@
+#!/usr/bin/env ts-node
+
+import { createExpressProject } from "../commands/create";
+
+const [, , projectName] = process.argv;
+if (!projectName) {
+  console.error("Please provide a project name.");
+} else {
+  createExpressProject(projectName);
+}

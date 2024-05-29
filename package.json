@@ -1,10 +1,13 @@
 {
   "name": "express-app-generator",
   "version": "1.0.0",
+  "bin": {
+    "express-gen": "./bin/Express-Boilerplate-Generator"
+  },
   "description": "",
-  "main": "index.js",
+  "main": "bin/Express-Boilerplate-Generator",
   "scripts": {
-    "dev": "ts-node-dev bin/Express-Boilerplate-Generator"
+    "dev": "ts-node bin/Express-Boilerplate-Generator"
   },
   "keywords": [],
   "author": "",
