@@ -1,5 +1,5 @@
-#!/usr/bin/env ts-node
-import "ts-node/register";
+#!/usr/bin/env node
+
 import { createExpressProject } from "../commands/create.js";
 const projectName = process.argv[2];
 if (!projectName) {

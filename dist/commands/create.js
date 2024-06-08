@@ -2,11 +2,17 @@ import fs from "fs";
 import { execSync } from "child_process";
 import chalk from "chalk";
 import path from "path";
+import { fileURLToPath } from "url";
 
 export function createExpressProject(projectName) {
   try {
-    const rootDir = process.cwd(); // Get the current working directory
-    const templatesDir = path.resolve(rootDir, "dist/templates"); // Resolve the templates directory
+    //current file URL
+    const __filename = fileURLToPath(import.meta.url);
+
+    //directory name of the current file
+    const __dirname = path.dirname(__filename);
+
+    const templatesDir = path.resolve(__dirname, "../templates");
 
     fs.mkdirSync(projectName);
     process.chdir(projectName);

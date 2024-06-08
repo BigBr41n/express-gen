@@ -1,6 +1,5 @@
-#!/usr/bin/env ts-node
+#!/usr/bin/env node
 
-import "ts-node/register";
 import { createExpressProject } from "../commands/create";
 
 const projectName = process.argv[2];
