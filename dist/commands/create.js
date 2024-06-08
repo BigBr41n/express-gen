@@ -1,9 +1,13 @@
 import fs from "fs";
 import { execSync } from "child_process";
 import chalk from "chalk";
+import path from "path";
 
-export function createExpressProject(projectName: string) {
+export function createExpressProject(projectName) {
   try {
+    const rootDir = process.cwd(); // Get the current working directory
+    const templatesDir = path.resolve(rootDir, "dist/templates"); // Resolve the templates directory
+
     fs.mkdirSync(projectName);
     process.chdir(projectName);
     console.log(chalk.green(`Created directory: ${projectName}`));
@@ -14,17 +18,24 @@ export function createExpressProject(projectName: string) {
     console.log(chalk.green("Created directory: src"));
 
     // Read template files
-    const serverTemplate = fs.readFileSync("../templates/server.ts", "utf-8");
-    const appTemplate = fs.readFileSync("../templates/app.ts", "utf-8");
-    const routerTemplate = fs.readFileSync("../templates/router.ts", "utf-8");
+    const serverTemplate = fs.readFileSync(
+      path.join(templatesDir, "server.js"),
+      "utf-8"
+    );
+    const appTemplate = fs.readFileSync(
+      path.join(templatesDir, "app.js"),
+      "utf-8"
+    );
+    const routerTemplate = fs.readFileSync(
+      path.join(templatesDir, "router.js"),
+      "utf-8"
+    );
 
     // Write template files to src directory
     fs.writeFileSync("server.ts", serverTemplate);
     console.log(chalk.green("Created file: src/server.ts"));
-
     fs.writeFileSync("app.ts", appTemplate);
     console.log(chalk.green("Created file: src/app.ts"));
-
     fs.writeFileSync("router.ts", routerTemplate);
     console.log(chalk.green("Created file: src/router.ts"));
 
@@ -47,10 +58,8 @@ export function createExpressProject(projectName: string) {
       "ts-node-dev",
       "ts-node",
     ];
-
     execSync(`npm install ${dependencies.join(" ")} --save`);
     execSync(`npm install ${devDependencies.join(" ")} -D`);
-
     console.log(chalk.green("Installed devDependencies && dependencies"));
 
     // Modify package.json
@@ -62,12 +71,11 @@ export function createExpressProject(projectName: string) {
     };
     fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
     console.log(chalk.green("Modified package.json"));
-
     console.log(
       chalk.green("Express.js TypeScript project created successfully!")
     );
 
-    //creating some folders i need
+    // Create additional directories
     process.chdir("src");
     const directories = [
       "routes",
@@ -79,19 +87,18 @@ export function createExpressProject(projectName: string) {
       "__tests__",
       "models",
     ];
-
     directories.forEach((dir) => {
       fs.mkdirSync(dir);
     });
 
-    //creating db config file in utils
+    // Create db config file in utils
     process.chdir("utils");
-    const db_config = fs.readFileSync("../../templates/db_config.ts", "utf-8");
-    fs.writeFileSync("connect.db.ts", db_config);
+    const dbConfigTemplate = fs.readFileSync(
+      path.join(templatesDir, "db_config.js"),
+      "utf-8"
+    );
+    fs.writeFileSync("connect.db.ts", dbConfigTemplate);
     console.log(chalk.green("Created file: src/utils/connect.db.ts"));
-    process.chdir("../..");
-    execSync("tsc --init");
-    console.log(chalk.green("initialized tsconfig.json"));
   } catch (err) {
     console.error(chalk.red("Error creating Express.js project:", err));
   }
