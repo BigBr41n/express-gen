@@ -116,5 +116,5 @@ If you want to contribute to the development of `express-app-generator`, just fo
 
 ## Problems
 
-still there are some problems & bugs will be fixed later
-the tool now is 98% functional
+All problems solve , so if you want to use the tool just clone the repo and follow the instructions,
+or maybe customize your configuration as you like .

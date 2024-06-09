@@ -57,6 +57,7 @@ export function createExpressProject(projectName) {
       "cors",
       "helmet",
       "cookie-parser",
+      "dotenv",
     ];
     const devDependencies = [
       "typescript",
@@ -73,7 +74,8 @@ export function createExpressProject(projectName) {
     const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf-8"));
     packageJson.scripts = {
       ...packageJson.scripts,
-      start: "ts-node-dev --respawn --transpileOnly src/server.ts",
+      start:
+        'ts-node-dev --respawn --transpile-only --compiler-options \'{"module": "NodeNext", "moduleResolution": "NodeNext"}\' src/server.ts',
     };
     fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
     console.log(chalk.green("Modified package.json"));
