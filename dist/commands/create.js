@@ -58,12 +58,18 @@ export function createExpressProject(projectName) {
       "helmet",
       "cookie-parser",
       "dotenv",
+      "zod",
+      "jest",
+      "supertest",
     ];
     const devDependencies = [
       "typescript",
       "@types/node",
       "ts-node-dev",
       "ts-node",
+      "@types/express",
+      "@types/mongoose",
+      "@types/cors",
     ];
     execSync(`npm install ${dependencies.join(" ")} --save`);
     execSync(`npm install ${devDependencies.join(" ")} -D`);
